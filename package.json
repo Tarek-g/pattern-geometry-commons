@@ -1,0 +1,61 @@
+{
+  "name": "pattern-geometry-commons",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Semantic intermediate representation (IR) for 2D pattern systems — schema, validation, compiler pipeline, and backend adapters",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "src/",
+    "spec/",
+    "examples/",
+    "scripts/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "makerjs": "^0.19.2"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "validate:all": "node scripts/validate-all.mjs",
+    "compile": "node scripts/compile.mjs",
+    "test:ir": "node scripts/validate-all.mjs",
+    "test:compiler": "node scripts/test-compiler.mjs",
+    "test:cross-backend": "node scripts/test-cross-backend.mjs",
+    "test:boundary": "node scripts/test-package-boundary.mjs",
+    "test:standalone": "node scripts/test-standalone-consumer.mjs",
+    "test:pack-contract": "node scripts/test-pack-contract.mjs",
+    "test:installed-tarball": "node scripts/test-installed-tarball-consumer.mjs",
+    "test:publish-dry-run": "node scripts/test-publish-dry-run.mjs",
+    "audit:publish-metadata": "node scripts/audit-publish-metadata.mjs",
+    "test:registry-publish": "node scripts/test-local-registry-publish.mjs",
+    "test:cross-node": "node scripts/test-cross-node-smoke.mjs"
+  },
+  "keywords": [
+    "pattern",
+    "geometry",
+    "islamic-pattern",
+    "semantic-ir",
+    "intermediate-representation",
+    "svg",
+    "dxf",
+    "makerjs"
+  ],
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tarek-g/pattern-geometry-commons.git"
+  },
+  "homepage": "https://github.com/Tarek-g/pattern-geometry-commons#readme",
+  "bugs": {
+    "url": "https://github.com/Tarek-g/pattern-geometry-commons/issues"
+  },
+  "author": "Tarek Alghorani"
+}

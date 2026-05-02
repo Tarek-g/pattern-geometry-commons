@@ -1,0 +1,60 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "octagon-square-star-482",
+    "name": "Octagon-Square Star Pattern (4.8.2)",
+    "description": "Foundational 8-fold Islamic star pattern combining octagonal and square tiles. The octagons produce 8-pointed stars while squares carry complementary star figures, creating the characteristic interlaced star lattice seen across Islamic architecture.",
+    "classification": "repeating-field",
+    "tags": ["islamic", "star", "octagon", "8-fold", "semi-regular-tiling"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "semi-regular",
+      "id": "4.8.2",
+      "grid": { "columns": 4, "rows": 3 }
+    },
+    "motifs": [
+      {
+        "tileType": "octagon",
+        "family": "star",
+        "variant": "classic",
+        "count": 12,
+        "parameters": {
+          "skip": 3.0,
+          "delta": 0.1
+        }
+      },
+      {
+        "tileType": "square",
+        "family": "star",
+        "variant": "classic",
+        "count": 6,
+        "parameters": {
+          "skip": 3.0
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p4m",
+      "rotational": 4,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 1.8,
+      "color": "#16213e",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "corpus",
+    "provenance": {
+      "period": "Medieval Islamic",
+      "region": "Iran / Central Asia",
+      "confidenceLevel": "high"
+    },
+    "license": "CC-BY-4.0"
+  }
+}

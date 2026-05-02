@@ -1,0 +1,76 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "fab-architectural-lattice",
+    "name": "Architectural Lattice Structure",
+    "description": "2D projection of a 3D architectural lattice suitable for large-format fabrication (water-jet cut metal panels, cast concrete formwork, or CNC-routed screens). The lattice combines diagonal structural ribs with decorative infill motifs in alternating cells. Each cell type carries distinct fabrication parameters.",
+    "classification": "lattice",
+    "tags": ["fabrication", "lattice", "architectural", "structural", "water-jet", "concrete-formwork"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "lattice",
+      "id": "diagonal-lattice",
+      "grid": { "columns": 8, "rows": 12 }
+    },
+    "motifs": [
+      {
+        "tileType": "structural-rib",
+        "family": "simple",
+        "variant": "diagonal-beam",
+        "count": 96,
+        "parameters": {
+          "beamWidth": 12.0,
+          "angle": 45,
+          "connectionRadius": 6.0
+        }
+      },
+      {
+        "tileType": "infill-cell-a",
+        "family": "star",
+        "variant": "open-star",
+        "count": 48,
+        "parameters": {
+          "points": 8,
+          "outerRadius": 40.0,
+          "innerRadius": 15.0,
+          "minBarWidth": 4.0
+        }
+      },
+      {
+        "tileType": "infill-cell-b",
+        "family": "polygon",
+        "variant": "open-hex",
+        "count": 48,
+        "parameters": {
+          "sides": 6,
+          "outerRadius": 35.0,
+          "minBarWidth": 4.0
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p4m",
+      "rotational": 4,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 1.0,
+      "color": "#000000",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "fabrication",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC-BY-4.0",
+    "provenance": {
+      "period": "Contemporary",
+      "region": "Global",
+      "confidenceLevel": "high"
+    }
+  }
+}

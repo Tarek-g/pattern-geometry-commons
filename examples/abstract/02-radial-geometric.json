@@ -1,0 +1,67 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "abstract-radial-geometric",
+    "name": "Radial Geometric Field",
+    "description": "Concentric radial arrangement of geometric motifs spreading outward from a center point. Each ring carries polygon motifs at increasing scale, demonstrating the IR's ability to describe non-tiling, radial symmetry patterns with the same motif vocabulary used for repeating fields.",
+    "classification": "radial",
+    "tags": ["abstract", "radial", "concentric", "polygon", "generative"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "radial",
+      "radius": 200,
+      "grid": { "columns": 1, "rows": 1 }
+    },
+    "motifs": [
+      {
+        "tileType": "ring-0",
+        "family": "polygon",
+        "variant": "regular",
+        "count": 1,
+        "parameters": {
+          "sides": 8,
+          "scale": 0.15
+        }
+      },
+      {
+        "tileType": "ring-1",
+        "family": "polygon",
+        "variant": "regular",
+        "count": 8,
+        "parameters": {
+          "sides": 6,
+          "scale": 0.5
+        }
+      },
+      {
+        "tileType": "ring-2",
+        "family": "polygon",
+        "variant": "regular",
+        "count": 16,
+        "parameters": {
+          "sides": 4,
+          "scale": 0.8
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": null,
+      "rotational": 8,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 2.0,
+      "color": "#533483",
+      "opacity": 0.9
+    }
+  },
+  "metadata": {
+    "source": "generative",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC0-1.0"
+  }
+}

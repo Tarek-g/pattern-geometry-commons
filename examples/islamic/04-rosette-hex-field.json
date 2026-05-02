@@ -1,0 +1,57 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "rosette-hex-field",
+    "name": "Rosette Hexagon Field",
+    "description": "Islamic rosette pattern on a regular hexagon tiling. Each hexagon carries a deep rosette motif — concentric layers of petals radiating from center — producing the lush floral-geometric fusion characteristic of late medieval Islamic architectural decoration.",
+    "classification": "repeating-field",
+    "tags": ["islamic", "rosette", "hexagon", "floral-geometric", "regular-tiling"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "regular",
+      "id": "6.6.6",
+      "grid": { "columns": 7, "rows": 7 }
+    },
+    "motifs": [
+      {
+        "tileType": "hexagon",
+        "family": "rosette",
+        "variant": "deep",
+        "count": 49,
+        "parameters": {
+          "depth": 3,
+          "scale": 1.1,
+          "q": 0.28,
+          "guardMargin": 0.94
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p6m",
+      "rotational": 6,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "fill",
+    "stroke": {
+      "width": 1.5,
+      "color": "#2c3e50",
+      "opacity": 1.0
+    },
+    "fill": {
+      "color": "#e8d5b7",
+      "opacity": 0.6
+    }
+  },
+  "metadata": {
+    "source": "corpus",
+    "provenance": {
+      "period": "Late Medieval Islamic (Timurid / Ottoman)",
+      "region": "Iran / Turkey",
+      "confidenceLevel": "high"
+    },
+    "license": "CC-BY-4.0"
+  }
+}

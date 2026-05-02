@@ -1,0 +1,48 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "abstract-square-grid",
+    "name": "Abstract Square Grid",
+    "description": "Minimal abstract grid pattern. Each square carries a simple polygon motif producing a clean repeating geometric field. Demonstrates the IR handling non-Islamic, non-star-pattern geometries with the same semantic vocabulary.",
+    "classification": "repeating-field",
+    "tags": ["abstract", "grid", "square", "minimal", "op-art"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "regular",
+      "id": "4.4.4.4",
+      "grid": { "columns": 5, "rows": 5 }
+    },
+    "motifs": [
+      {
+        "tileType": "square",
+        "family": "polygon",
+        "variant": "inscribed",
+        "count": 25,
+        "parameters": {
+          "sides": 4,
+          "rotation": 45,
+          "scale": 0.7
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p4m",
+      "rotational": 4,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 1.5,
+      "color": "#e94560",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "generative",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC0-1.0"
+  }
+}

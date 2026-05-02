@@ -1,0 +1,56 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "fab-laser-cut-panel",
+    "name": "Laser-Cut Decorative Panel",
+    "description": "Vector cut pattern for laser-cut decorative panels. Interlocking hexagon mesh with internal cutout motifs designed for single-pass laser cutting on 3mm plywood or acrylic sheet. Cut lines are specified as continuous paths; kerf compensation and lead-in/lead-out are backend responsibilities.",
+    "classification": "repeating-field",
+    "tags": ["fabrication", "laser-cut", "panel", "hexagon", "interlocking", "plywood"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "regular",
+      "id": "6.6.6",
+      "grid": { "columns": 5, "rows": 4 }
+    },
+    "motifs": [
+      {
+        "tileType": "hexagon",
+        "family": "custom",
+        "variant": "interlocking-mesh",
+        "count": 20,
+        "parameters": {
+          "cutLineWidth": 0.2,
+          "tabWidth": 4.0,
+          "innerCutout": "hex-star",
+          "innerScale": 0.6,
+          "materialThickness": 3.0,
+          "kerfCompensation": 0.1
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p6m",
+      "rotational": 6,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 0.2,
+      "color": "#ff0000",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "fabrication",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC-BY-4.0",
+    "provenance": {
+      "period": "Contemporary",
+      "region": "Global",
+      "confidenceLevel": "high"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "decagon-hexagon-star-10-6-10-6",
+    "name": "Decagon-Hexagon 10-Fold Star Field",
+    "description": "10-fold Islamic star pattern on a decagon-hexagon semi-regular tiling (10.6.10.6). Decagons carry 10-pointed stars with hexagons filling interstitial spaces with complementary star motifs. The 10-fold symmetry is characteristic of sophisticated Islamic geometric design from the later medieval period.",
+    "classification": "repeating-field",
+    "tags": ["islamic", "star", "decagon", "10-fold", "semi-regular-tiling"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "semi-regular",
+      "id": "10.6.10.6",
+      "grid": { "columns": 4, "rows": 3 }
+    },
+    "motifs": [
+      {
+        "tileType": "decagon",
+        "family": "star",
+        "variant": "classic",
+        "count": 12,
+        "parameters": {
+          "skip": 3.0,
+          "delta": 0.1
+        }
+      },
+      {
+        "tileType": "hexagon",
+        "family": "star",
+        "variant": "classic",
+        "count": 12,
+        "parameters": {
+          "skip": 1.5
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p6m",
+      "rotational": 6,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 2.0,
+      "color": "#0f3460",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "corpus",
+    "provenance": {
+      "period": "Late Medieval Islamic",
+      "region": "Iran / Central Asia",
+      "confidenceLevel": "high"
+    },
+    "license": "CC-BY-4.0"
+  }
+}

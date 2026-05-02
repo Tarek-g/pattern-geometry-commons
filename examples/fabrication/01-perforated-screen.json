@@ -1,0 +1,57 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "fab-perforated-screen",
+    "name": "Perforated Architectural Screen",
+    "description": "Perforation pattern for architectural mashrabiya-style screens. Circular holes arranged on a diagonal grid with precise spacing suitable for CNC routing, laser cutting, or water-jet fabrication. The IR encodes hole geometry, spacing, and panel dimensions as semantic parameters for fabrication backends.",
+    "classification": "repeating-field",
+    "tags": ["fabrication", "perforation", "screen", "mashrabiya", "cnc", "architectural"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "custom",
+      "id": "diagonal-grid",
+      "grid": { "columns": 10, "rows": 15 }
+    },
+    "motifs": [
+      {
+        "tileType": "perforation-cell",
+        "family": "simple",
+        "variant": "circle-hole",
+        "count": 150,
+        "parameters": {
+          "holeDiameter": 8.0,
+          "spacing": 20.0,
+          "staggerOffset": 10.0
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "cmm",
+      "rotational": 2,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "fill",
+    "stroke": {
+      "width": 0.5,
+      "color": "#000000",
+      "opacity": 1.0
+    },
+    "fill": {
+      "color": "#ffffff",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "fabrication",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC-BY-4.0",
+    "provenance": {
+      "period": "Contemporary",
+      "region": "Global",
+      "confidenceLevel": "high"
+    }
+  }
+}

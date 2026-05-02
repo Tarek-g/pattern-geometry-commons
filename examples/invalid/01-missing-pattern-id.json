@@ -1,0 +1,25 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "name": "Invalid Pattern — Missing Required ID",
+    "description": "This file intentionally omits the required pattern.id field. It must fail schema validation with a clear error message indicating the missing required property.",
+    "classification": "repeating-field"
+  },
+  "geometry": {
+    "tiling": {
+      "type": "regular",
+      "id": "4.4.4.4",
+      "grid": { "columns": 3, "rows": 3 }
+    },
+    "motifs": [
+      {
+        "tileType": "square",
+        "family": "polygon",
+        "count": 9
+      }
+    ]
+  },
+  "style": {
+    "renderMode": "line"
+  }
+}

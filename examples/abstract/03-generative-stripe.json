@@ -1,0 +1,69 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "abstract-generative-stripe",
+    "name": "Generative Stripe / Moire Field",
+    "description": "Generative interference pattern produced by overlapping stripe systems at varying angles. Demonstrates the IR's ability to describe non-traditional, computationally-generated patterns without any reference to historical tiling systems or Islamic geometric tradition.",
+    "classification": "freeform",
+    "tags": ["abstract", "generative", "moire", "stripe", "freeform", "computational"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "none",
+      "grid": { "columns": 1, "rows": 1 }
+    },
+    "motifs": [
+      {
+        "tileType": "stripe-system-0",
+        "family": "custom",
+        "variant": "parallel-lines",
+        "count": 20,
+        "parameters": {
+          "spacing": 12.0,
+          "angle": 0,
+          "weight": 3.0
+        }
+      },
+      {
+        "tileType": "stripe-system-1",
+        "family": "custom",
+        "variant": "parallel-lines",
+        "count": 20,
+        "parameters": {
+          "spacing": 12.0,
+          "angle": 15,
+          "weight": 3.0
+        }
+      },
+      {
+        "tileType": "stripe-system-2",
+        "family": "custom",
+        "variant": "parallel-lines",
+        "count": 20,
+        "parameters": {
+          "spacing": 12.0,
+          "angle": 30,
+          "weight": 3.0
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": null,
+      "rotational": null,
+      "reflectional": false
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 1.0,
+      "color": "#222831",
+      "opacity": 0.7
+    }
+  },
+  "metadata": {
+    "source": "generative",
+    "author": "Pattern Geometry Commons WP-1",
+    "license": "CC0-1.0"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pattern-geometry-commons.org/schemas/pg-ir-v0.schema.json",
+  "title": "Pattern Geometry IR v0",
+  "description": "Semantic intermediate representation for 2D pattern systems. Describes what a pattern means — motifs, arrangement, repetition, symmetry, rendering intent — independent of any specific geometry backend. Backends (Maker.js, SVG, DXF, etc.) receive this IR and produce low-level geometry.",
+  "type": "object",
+  "required": ["version", "pattern", "geometry"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version identifier. Must be exactly 'pg-ir-v0' for this revision.",
+      "const": "pg-ir-v0"
+    },
+    "pattern": {
+      "type": "object",
+      "description": "Pattern identity: what this pattern is called and how it is classified.",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique machine-readable identifier for this pattern instance.",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short prose description of the pattern's character and intent."
+        },
+        "classification": {
+          "type": "string",
+          "description": "Structural classification of the pattern arrangement.",
+          "enum": ["repeating-field", "frieze", "radial", "freeform", "lattice"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Optional search/discovery tags.",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "description": "Semantic geometry: what the pattern is made of — not how to draw it. This is the 'recipe' layer above backends.",
+      "additionalProperties": false,
+      "properties": {
+        "tiling": {
+          "type": "object",
+          "description": "The tiling/arrangement system that governs motif placement.",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Category of tiling. 'none' used for freeform arrangements.",
+              "enum": ["regular", "semi-regular", "custom", "frieze", "radial", "lattice", "none"]
+            },
+            "id": {
+              "type": "string",
+              "description": "Optional registered tiling identifier (e.g. '4.8.2', '6.6.6')."
+            },
+            "grid": {
+              "type": "object",
+              "description": "Grid dimensions for repeating-field tilings.",
+              "additionalProperties": false,
+              "properties": {
+                "columns": { "type": "integer", "minimum": 1 },
+                "rows": { "type": "integer", "minimum": 1 }
+              }
+            },
+            "stripWidth": {
+              "type": "number",
+              "description": "Strip width for frieze-type arrangements."
+            },
+            "stripLength": {
+              "type": "number",
+              "description": "Strip length for frieze-type arrangements."
+            },
+            "radius": {
+              "type": "number",
+              "description": "Radial extent for radial-type arrangements."
+            }
+          }
+        },
+        "motifs": {
+          "type": "array",
+          "description": "Motif definitions: the semantic building blocks placed on tiles. Each entry describes the figure family applied to a tile type, plus optional parameters. This is the core semantic payload — backends interpret these to produce actual geometry.",
+          "items": {
+            "type": "object",
+            "required": ["tileType", "family"],
+            "additionalProperties": false,
+            "properties": {
+              "tileType": {
+                "type": "string",
+                "description": "The tile shape this motif applies to (e.g. 'hexagon', 'octagon', 'square')."
+              },
+              "family": {
+                "type": "string",
+                "description": "Figure family: the semantic category of the motif.",
+                "enum": ["star", "rosette", "polygon", "simple", "custom", "irregular"]
+              },
+              "variant": {
+                "type": "string",
+                "description": "Variant within the family (e.g. 'classic', 'deep', 'sharp')."
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of tiles carrying this motif."
+              },
+              "parameters": {
+                "type": "object",
+                "description": "Family-specific parameters (e.g. skip, delta for stars; depth, scale for rosettes). Schema is intentionally open here — specific parameters are validated by the target backend, not the IR schema."
+              }
+            }
+          }
+        },
+        "symmetry": {
+          "type": "object",
+          "description": "Symmetry metadata. Optional: backends may compute this, or it may be declared.",
+          "additionalProperties": false,
+          "properties": {
+            "wallpaperGroup": {
+              "type": ["string", "null"],
+              "description": "Wallpaper/crystallographic group (e.g. 'p6m', 'p4m', 'p1'), or null if not applicable."
+            },
+            "rotational": {
+              "type": ["integer", "null"],
+              "description": "Maximum rotational symmetry order, or null if not applicable."
+            },
+            "reflectional": {
+              "type": "boolean",
+              "description": "Whether the pattern has reflection symmetry."
+            }
+          }
+        }
+      }
+    },
+    "style": {
+      "type": "object",
+      "description": "Rendering intent: how the pattern should be visually presented. Style is semantic guidance for backends, not pixel-exact CSS.",
+      "additionalProperties": false,
+      "properties": {
+        "renderMode": {
+          "type": "string",
+          "description": "Primary rendering mode. 'line' = stroke-only, 'fill' = filled shapes, 'interlace' = over/under weave, 'band' = ribbon band.",
+          "enum": ["line", "fill", "interlace", "band", "none"]
+        },
+        "stroke": {
+          "type": "object",
+          "description": "Stroke (line) styling guidance.",
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "number", "minimum": 0 },
+            "color": { "type": "string" },
+            "opacity": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "fill": {
+          "type": "object",
+          "description": "Fill styling guidance.",
+          "additionalProperties": false,
+          "properties": {
+            "color": { "type": "string" },
+            "opacity": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional metadata extensions. Not required for pattern generation — these are discovery, provenance, and licensing fields. The core IR must validate without any metadata.",
+      "additionalProperties": true,
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Origin of the pattern.",
+          "enum": ["historical", "creative", "generative", "corpus", "fabrication"]
+        },
+        "provenance": {
+          "type": "object",
+          "description": "Historical or design provenance.",
+          "additionalProperties": true,
+          "properties": {
+            "period": { "type": "string" },
+            "region": { "type": "string" },
+            "dynasty": { "type": "string" },
+            "sourceCitation": { "type": "string" },
+            "confidenceLevel": { "type": "string" }
+          }
+        },
+        "author": { "type": "string" },
+        "license": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "generator": { "type": "string" }
+      }
+    }
+  }
+}

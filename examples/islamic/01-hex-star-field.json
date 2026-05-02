@@ -1,0 +1,50 @@
+{
+  "version": "pg-ir-v0",
+  "pattern": {
+    "id": "hex-star-field-666",
+    "name": "Hexagon Star Field (6.6.6)",
+    "description": "Classic Islamic 6-fold star pattern on a regular hexagon tiling. Each hexagon tile carries a star motif with 6-fold rotational symmetry, producing a continuous star field across the repeating plane.",
+    "classification": "repeating-field",
+    "tags": ["islamic", "star", "hexagon", "6-fold", "regular-tiling"]
+  },
+  "geometry": {
+    "tiling": {
+      "type": "regular",
+      "id": "6.6.6",
+      "grid": { "columns": 7, "rows": 7 }
+    },
+    "motifs": [
+      {
+        "tileType": "hexagon",
+        "family": "star",
+        "variant": "classic",
+        "count": 49,
+        "parameters": {
+          "skip": 1.5
+        }
+      }
+    ],
+    "symmetry": {
+      "wallpaperGroup": "p6m",
+      "rotational": 6,
+      "reflectional": true
+    }
+  },
+  "style": {
+    "renderMode": "line",
+    "stroke": {
+      "width": 2.0,
+      "color": "#1a1a2e",
+      "opacity": 1.0
+    }
+  },
+  "metadata": {
+    "source": "corpus",
+    "provenance": {
+      "period": "Medieval Islamic",
+      "region": "Middle East / Central Asia",
+      "confidenceLevel": "high"
+    },
+    "license": "CC-BY-4.0"
+  }
+}
