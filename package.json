@@ -36,7 +36,8 @@
     "test:publish-dry-run": "node scripts/test-publish-dry-run.mjs",
     "audit:publish-metadata": "node scripts/audit-publish-metadata.mjs",
     "test:registry-publish": "node scripts/test-local-registry-publish.mjs",
-    "test:cross-node": "node scripts/test-cross-node-smoke.mjs"
+    "test:cross-node": "node scripts/test-cross-node-smoke.mjs",
+    "check:publish-target": "node scripts/check-publish-target.mjs"
   },
   "keywords": [
     "pattern",
@@ -57,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/Tarek-g/pattern-geometry-commons/issues"
   },
-  "author": "Tarek Alghorani"
+  "author": "Tarek Alghorani",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
