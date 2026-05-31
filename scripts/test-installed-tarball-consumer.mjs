@@ -22,6 +22,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PKG_ROOT = join(__dirname, '..');
 const require = createRequire(import.meta.url);
+const PACKAGE_NAME = '@tarek-g/pattern-geometry-commons';
 
 let passed = 0;
 let failed = 0;
@@ -105,7 +106,7 @@ async function run() {
 
   // Phase 4: Verify installed package structure
   console.log('[Phase 4] Verifying installed package...\n');
-  const pkgInstallDir = join(consumerDir, 'node_modules', 'pattern-geometry-commons');
+  const pkgInstallDir = join(consumerDir, 'node_modules', '@tarek-g', 'pattern-geometry-commons');
 
   const requiredFiles = [
     ['package.json', 'package.json'],
@@ -132,7 +133,7 @@ async function run() {
   // Write a test file that imports from the installed package
   const testFilePath = join(consumerDir, 'test-import.mjs');
   await writeFile(testFilePath, `
-import { validateIr, compileIr, listFormats, loadExample, listExamples } from ${"'"}pattern-geometry-commons${"'"};
+import { validateIr, compileIr, listFormats, loadExample, listExamples } from ${"'"}${PACKAGE_NAME}${"'"};
 
 const results = [];
 

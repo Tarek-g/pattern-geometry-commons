@@ -1,5 +1,5 @@
 {
-  "name": "@Tarek-g/pattern-geometry-commons",
+  "name": "@tarek-g/pattern-geometry-commons",
   "version": "0.1.0",
   "private": false,
   "description": "Semantic intermediate representation (IR) for 2D pattern systems — schema, validation, compiler pipeline, and backend adapters",
@@ -13,7 +13,8 @@
     "spec/",
     "examples/",
     "scripts/",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=18"
@@ -49,7 +50,7 @@
     "dxf",
     "makerjs"
   ],
-  "license": "CC-BY-4.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Tarek-g/pattern-geometry-commons.git"

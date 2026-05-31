@@ -24,6 +24,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PKG_ROOT = join(__dirname, '..');
 const require = createRequire(import.meta.url);
+const PACKAGE_NAME = '@tarek-g/pattern-geometry-commons';
 
 let passed = 0;
 let failed = 0;
@@ -73,7 +74,7 @@ async function run() {
   let tarballName;
   try {
     const { out } = await exec('npm', ['pack', '--json'], { cwd: PKG_ROOT });
-    // npm pack --json outputs an array: [{"id":"pattern-geometry-commons@0.1.0","name":"pattern-geometry-commons-0.1.0.tgz",...}]
+    // npm pack --json outputs an array with the tarball metadata.
     const results = JSON.parse(out.trim());
     const entry = Array.isArray(results) ? results[0] : results;
     tarballName = entry.filename || entry.name;
@@ -185,7 +186,7 @@ async function run() {
     const extractedPkg = JSON.parse(
       await readFile(join(tmpDir, 'package', 'package.json'), 'utf-8')
     );
-    check('tarball package name matches', extractedPkg.name === 'pattern-geometry-commons',
+    check('tarball package name matches', extractedPkg.name === PACKAGE_NAME,
       extractedPkg.name);
     check('tarball version is 0.1.0', extractedPkg.version === '0.1.0',
       extractedPkg.version);

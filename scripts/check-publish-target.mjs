@@ -29,7 +29,7 @@ console.log(`Target:         ${registry}`);
 if (registry.includes('pkg.github.com')) {
   console.log('Auth method:    GITHUB_TOKEN (environment variable)');
   console.log('Auth scope:     read:packages, write:packages');
-  console.log('Login:          export GITHUB_TOKEN=ghp_...');
+  console.log('Login:          export GITHUB_TOKEN=<token>');
   console.log('               npm config set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN');
 } else if (registry.includes('registry.npmjs.org')) {
   console.log('Auth method:    npm login (or npm token)');
@@ -44,6 +44,6 @@ console.log(`Bugs:           ${typeof PKG.bugs === 'object' ? PKG.bugs.url || PK
 console.log(`Author:         ${typeof PKG.author === 'object' ? PKG.author.name : PKG.author || 'NOT SET'}`);
 
 console.log('\n=== Ready to publish ===');
-console.log(`  cd packages/pattern-geometry-commons`);
+console.log(`  cd pattern-geometry-commons`);
 console.log(`  npm publish`);
 console.log();

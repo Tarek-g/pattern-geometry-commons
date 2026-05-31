@@ -239,7 +239,8 @@ try { pkg = JSON.parse(await readFile(join(PKG, 'package.json'), 'utf-8')); }
 catch { pkg = null; }
 
 if (pkg) {
-  check('"name" is pattern-geometry-commons', pkg.name === 'pattern-geometry-commons', pkg.name);
+  check('"name" is @tarek-g/pattern-geometry-commons',
+    pkg.name === '@tarek-g/pattern-geometry-commons', pkg.name);
   check('"type" is module', pkg.type === 'module', pkg.type);
   check('"main" → ./src/index.mjs', pkg.main === './src/index.mjs', pkg.main);
   check('"exports" → ./src/index.mjs', pkg.exports?.['.'] === './src/index.mjs',

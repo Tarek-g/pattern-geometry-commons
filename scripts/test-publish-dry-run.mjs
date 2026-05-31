@@ -18,6 +18,7 @@ import { tmpdir } from 'node:os';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PKG_ROOT = join(__dirname, '..');
+const PACKAGE_NAME = '@tarek-g/pattern-geometry-commons';
 
 let passed = 0;
 let failed = 0;
@@ -66,8 +67,8 @@ async function run() {
 
   const nameMatch = combined.match(/npm notice name:\s+(.+)$/m);
   check('package name in output', !!nameMatch, nameMatch ? nameMatch[1] : 'not found');
-  check('package name is pattern-geometry-commons',
-    nameMatch && nameMatch[1].trim() === 'pattern-geometry-commons',
+  check(`package name is ${PACKAGE_NAME}`,
+    nameMatch && nameMatch[1].trim() === PACKAGE_NAME,
     nameMatch ? nameMatch[1].trim() : '');
 
   const versionMatch = combined.match(/npm notice version:\s+(.+)$/m);

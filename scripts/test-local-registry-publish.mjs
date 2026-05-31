@@ -16,16 +16,17 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
-import { createHash } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { createServer } from 'node:net';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PKG_ROOT = join(__dirname, '..');
+const PACKAGE_NAME = '@tarek-g/pattern-geometry-commons';
 
 // Pre-computed credentials for local verdaccio
 const REGISTRY_USER = 'admin';
-const REGISTRY_PASS = 'admin123';
+const REGISTRY_PASS = randomBytes(18).toString('base64url');
 const REGISTRY_EMAIL = 'admin@local.test';
 
 let passed = 0;
@@ -92,7 +93,7 @@ uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 packages:
-  'pattern-geometry-commons':
+  '@tarek-g/*':
     access: $all
     publish: $all
     unpublish: $all
@@ -152,14 +153,15 @@ log: { type: stdout, format: pretty, level: error }
   const publishNpmrc = join(workDir, 'publish.npmrc');
   await writeFile(publishNpmrc, [
     `registry=${registryUrl}`,
+    `@tarek-g:registry=${registryUrl}`,
     `//localhost:${registryPort}/:_auth=${authToken}`,
-    `email=${REGISTRY_EMAIL}`,
     '',
   ].join('\n'));
 
   // .npmrc for consumer project (npm reads this automatically)
   await writeFile(join(consumerDir, '.npmrc'), [
     `registry=${registryUrl}`,
+    `@tarek-g:registry=${registryUrl}`,
     `//localhost:${registryPort}/:_auth=${authToken}`,
     '',
   ].join('\n'));
@@ -183,13 +185,13 @@ log: { type: stdout, format: pretty, level: error }
     const tarballName = packOut.trim().split('\n').pop().trim();
     tarballPath = join(PKG_ROOT, tarballName);
 
-    const pubResult = await exec('npm', ['publish', '--userconfig', publishNpmrc, tarballPath], {
+    const pubResult = await exec('npm', ['publish', '--userconfig', publishNpmrc, '--registry', registryUrl, tarballPath], {
       cwd: PKG_ROOT,
     });
     const pubCombined = pubResult.out + pubResult.err;
     publishOk = pubResult.code === 0 && !pubCombined.includes('ERR!');
     check('npm publish to local registry succeeds', publishOk,
-      publishOk ? '' : `exit=${pubResult.code}\n${pubCombined.substring(0, 300)}`);
+      publishOk ? '' : `exit=${pubResult.code}\n${pubCombined.substring(0, 1200)}`);
   } catch (err) {
     check('npm publish to local registry succeeds', false, err.stderr || err.message);
   }
@@ -202,7 +204,7 @@ log: { type: stdout, format: pretty, level: error }
 
   let installOk = false;
   try {
-    const { out, err } = await exec('npm', ['install', 'pattern-geometry-commons@0.1.0'], {
+    const { out, err } = await exec('npm', ['install', `${PACKAGE_NAME}@0.1.0`], {
       cwd: consumerDir,
     });
     installOk = true;
@@ -222,7 +224,7 @@ log: { type: stdout, format: pretty, level: error }
   // Phase 5: Verify installed package structure
   console.log(`\n[Phase 5] Verifying installed package...\n`);
 
-  const installedDir = join(consumerDir, 'node_modules', 'pattern-geometry-commons');
+  const installedDir = join(consumerDir, 'node_modules', '@tarek-g', 'pattern-geometry-commons');
   const requiredFiles = [
     ['package.json', 'package.json'],
     ['src/index.mjs', 'src/index.mjs'],
@@ -243,7 +245,7 @@ log: { type: stdout, format: pretty, level: error }
 
   const smokePath = join(consumerDir, 'smoke.mjs');
   await writeFile(smokePath, `
-import { validateIr, compileIr, loadExample, listExamples } from ${"'"}pattern-geometry-commons${"'"};
+import { validateIr, compileIr, loadExample, listExamples } from ${"'"}${PACKAGE_NAME}${"'"};
 
 const examples = await listExamples();
 const hex = examples.find(e => e.name === '01-hex-star-field');

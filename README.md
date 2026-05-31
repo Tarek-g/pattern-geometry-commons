@@ -115,7 +115,7 @@ Geometry Output
 ## Package Structure
 
 ```
-packages/pattern-geometry-commons/
+pattern-geometry-commons/
   README.md                     ← This file
   spec/
     pg-ir.schema.json           ← JSON Schema (draft 2020-12) for pg-ir-v0
@@ -149,54 +149,53 @@ packages/pattern-geometry-commons/
 ### Validate a single file
 
 ```bash
-node packages/pattern-geometry-commons/scripts/validate.mjs \
-  packages/pattern-geometry-commons/examples/islamic/01-hex-star-field.json
+node scripts/validate.mjs examples/islamic/01-hex-star-field.json
 ```
 
 ### Validate all examples
 
 ```bash
-npm run test:pgc-ir
+npm run test:ir
 ```
 
 Or directly:
 
 ```bash
-node packages/pattern-geometry-commons/scripts/validate-all.mjs
+node scripts/validate-all.mjs
 ```
 
 ### Validate specific files
 
 ```bash
-npm run validate:pgc-ir -- file1.json file2.json
+npm run validate -- file1.json file2.json
 ```
 
 ### Compile IR to SVG
 
 ```bash
 # Via CLI
-node packages/pattern-geometry-commons/scripts/compile.mjs \
-  packages/pattern-geometry-commons/examples/islamic/01-hex-star-field.json \
+node scripts/compile.mjs \
+  examples/islamic/01-hex-star-field.json \
   --format svg --out output.svg
 
 # Via API
-import { compileIr } from 'pattern-geometry-commons';
+import { compileIr } from '@tarek-g/pattern-geometry-commons';
 const { result, meta } = await compileIr(ir, { format: 'svg' });
 ```
 
 ### Compile IR to Maker.js JSON
 
 ```bash
-node packages/pattern-geometry-commons/scripts/compile.mjs \
-  packages/pattern-geometry-commons/examples/islamic/01-hex-star-field.json \
+node scripts/compile.mjs \
+  examples/islamic/01-hex-star-field.json \
   --format makerjs-json --out hex-star.makerjs.json
 ```
 
 ### Run all PG-IR tests
 
 ```bash
-npm run test:pgc-ir        # Schema validation
-npm run test:pgc-compiler   # Compiler pipeline
+npm run test:ir        # Schema validation
+npm run test:compiler  # Compiler pipeline
 ```
 
 ## Compiler Pipeline
@@ -233,7 +232,7 @@ function compile(ir, options) → { svg|model, meta: { tileCount, tiling, render
 Backends are registered by format identifier:
 
 ```js
-import { registerBackend } from 'pattern-geometry-commons';
+import { registerBackend } from '@tarek-g/pattern-geometry-commons';
 registerBackend('dxf', myDxfCompiler);
 ```
 
@@ -291,7 +290,7 @@ Current scope:
 Generated artifacts are written locally when tests or compile commands run:
 
 ```text
-packages/pattern-geometry-commons/output/makerjs/
+output/makerjs/
 ```
 
 ### Maker.js SVG Export Backend
@@ -306,7 +305,7 @@ const { result, meta } = await compileIr(ir, { format: 'makerjs-svg' });
 ```
 
 ```bash
-node packages/pattern-geometry-commons/scripts/compile.mjs \
+node scripts/compile.mjs \
   example.json --format makerjs-svg --out output.svg
 ```
 
@@ -326,7 +325,7 @@ const { result, meta } = await compileIr(ir, { format: 'makerjs-dxf' });
 ```
 
 ```bash
-node packages/pattern-geometry-commons/scripts/compile.mjs \
+node scripts/compile.mjs \
   example.json --format makerjs-dxf --out output.dxf
 ```
 
@@ -404,19 +403,19 @@ The schema is defined in `spec/pg-ir.schema.json` using JSON Schema draft 2020-1
 
 Pattern Geometry Commons is defined as a standalone package with its own `package.json` at the package root. The manifest declares:
 
-- **name:** `pattern-geometry-commons`
+- **name:** `@tarek-g/pattern-geometry-commons`
 - **type:** `module` (ESM)
 - **main / exports:** `./src/index.mjs`
-- **dependencies:** `makerjs` (only; no `jspdf`, no `ajv` at the package level — `ajv` is hoisted from the root)
+- **dependencies:** `ajv`, `makerjs` (no `jspdf`)
 
 This allows other projects to depend on PGC directly:
 
 ```bash
-npm install ./packages/pattern-geometry-commons
+npm install @tarek-g/pattern-geometry-commons
 ```
 
 ```js
-import { validateIr, compileIr, listFormats } from 'pattern-geometry-commons';
+import { validateIr, compileIr, listFormats } from '@tarek-g/pattern-geometry-commons';
 ```
 
 ### Distribution Contract
@@ -434,8 +433,8 @@ The PGC tarball (`npm pack`) includes:
 The CLI scripts are part of the package distribution contract. Consumers who install PGC from a tarball can run:
 
 ```bash
-node node_modules/pattern-geometry-commons/scripts/validate.mjs input.json
-node node_modules/pattern-geometry-commons/scripts/compile.mjs input.json --format svg
+node node_modules/@tarek-g/pattern-geometry-commons/scripts/validate.mjs input.json
+node node_modules/@tarek-g/pattern-geometry-commons/scripts/compile.mjs input.json --format svg
 ```
 
 No `bin` entries are declared — CLI tools are invoked with `node` directly. The `output/` directory is excluded from distribution (build artifacts, not source).
@@ -444,23 +443,22 @@ No `bin` entries are declared — CLI tools are invoked with `node` directly. Th
 
 | Script | Description |
 |--------|-------------|
-| `validate:pgc-ir` | Validate one or more IR files |
-| `test:pgc-ir` | Run all PG-IR validation tests |
-| `compile:pgc` | Compile IR to output format via CLI |
-| `test:pgc-compiler` | Run compiler pipeline test suite |
-| `test:pgc-makerjs` | Run compiler suite including Maker.js JSON backend checks |
-| `test:pgc-cross-backend` | Cross-backend verification (svg ↔ makerjs-svg structural comparison) |
-| `test:pgc-boundary` | Package boundary guard — asserts public API, blocks coupling to app internals |
-| `test:pgc-standalone` | External consumer smoke test — proves package works from outside the repo |
-| `test:pgc-pack-contract` | Pack contract test — verifies `npm pack` produces correct tarball contents |
-| `test:pgc-installed-tarball` | Installed tarball consumer test — proves package works when installed from tarball |
+| `validate` | Validate one or more IR files |
+| `validate:all` / `test:ir` | Run all PG-IR validation tests |
+| `compile` | Compile IR to output format via CLI |
+| `test:compiler` | Run compiler pipeline test suite |
+| `test:cross-backend` | Cross-backend verification (svg ↔ makerjs-svg structural comparison) |
+| `test:boundary` | Package boundary guard — asserts public API, blocks coupling to app internals |
+| `test:standalone` | External consumer smoke test — proves package works from outside the repo |
+| `test:pack-contract` | Pack contract test — verifies `npm pack` produces correct tarball contents |
+| `test:installed-tarball` | Installed tarball consumer test — proves package works when installed from tarball |
 
 ## CLI Reference
 
-### `compile:pgc` — Compile IR to output format
+### `compile` — Compile IR to output format
 
 ```bash
-npm run compile:pgc -- <file.json> [--format svg] [--out output.svg] [--no-validate] [--cell-size 60]
+npm run compile -- <file.json> [--format svg] [--out output.svg] [--no-validate] [--cell-size 60]
 ```
 
 Options:
@@ -473,10 +471,10 @@ Options:
 | `--cell-size` | Tile cell size in SVG units | `60` |
 | `--list` | List available output formats | — |
 
-### `validate:pgc-ir` — Validate IR files
+### `validate` — Validate IR files
 
 ```bash
-npm run validate:pgc-ir -- <file.json> [file2.json ...]
+npm run validate -- <file.json> [file2.json ...]
 ```
 
 ## Generated Artifacts
@@ -526,14 +524,14 @@ requires a jsPDF document instance as the first argument. jsPDF is not in the
 dependency tree. The `makerjs-pdf` backend is deferred to a future WP when
 PDF export is explicitly required by a consumer.
 
-After running `npm run test:pgc-cross-backend`, see `output/cross-backend/pdf-export-evaluation.md` for the full blocker report.
+After running `npm run test:cross-backend`, see `output/cross-backend/pdf-export-evaluation.md` for the full blocker report.
 
 ## Cross-Backend Verification
 
 Run structural comparison between the built-in SVG backend and Maker.js SVG/DXF:
 
 ```bash
-npm run test:pgc-cross-backend
+npm run test:cross-backend
 ```
 
 Verifies across all 10 valid examples:
@@ -547,17 +545,17 @@ Verifies across all 10 valid examples:
 Remaining notes (all 3 tiling gaps from WP-7 resolved: 10.6.10.6, lattice, and none/freeform all emit real geometry in both backends):
 - `10.6.10.6` is hyperbolic (vertex sum 528° > 360°); the checkerboard layout is an artistic approximation of a non-Euclidean tiling. Motif counts differ from IR metadata counts.
 - `lattice` tile type distribution: the 3-way alternating pattern produces ~32 tiles/type on an 8×12 grid. IR metadata specifies 96+48+48 per type, which would require a denser multi-layer layout.
-- `makerjs-pdf` backend: blocked on jsPDF dependency. Run `npm run test:pgc-cross-backend` to regenerate `output/cross-backend/pdf-export-evaluation.md`.
+- `makerjs-pdf` backend: blocked on jsPDF dependency. Run `npm run test:cross-backend` to regenerate `output/cross-backend/pdf-export-evaluation.md`.
 
 Regenerate all artifacts:
 
 ```bash
-for f in packages/pattern-geometry-commons/examples/islamic/*.json \
-         packages/pattern-geometry-commons/examples/abstract/*.json \
-         packages/pattern-geometry-commons/examples/fabrication/*.json; do
+for f in examples/islamic/*.json \
+         examples/abstract/*.json \
+         examples/fabrication/*.json; do
   name=$(basename "$f" .json)
-  node packages/pattern-geometry-commons/scripts/compile.mjs "$f" --no-validate \
-    --out "packages/pattern-geometry-commons/output/examples/${name}.svg"
+  node scripts/compile.mjs "$f" --no-validate \
+    --out "output/examples/${name}.svg"
 done
 ```
 
@@ -569,4 +567,5 @@ The islamic-pattern-mvp `scene-v4` / `ornament-ir-v1` remain the internal format
 
 ## License
 
-CC-BY-4.0 (for the IR spec and examples).
+Apache-2.0. This license applies to the code, IR specification, examples,
+scripts, and documentation in this repository unless a file states otherwise.
