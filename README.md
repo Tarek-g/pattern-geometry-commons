@@ -8,6 +8,14 @@
 
 ---
 
+## Origin and Authorship
+
+Pattern Geometry Commons was created by **[Tarek Alghorani](https://github.com/Tarek-g)** in 2026 as a semantic IR for 2D geometric pattern systems, extracted from earlier work on [islamic-pattern-mvp](https://github.com/Tarek-g/islamic-pattern-mvp).
+
+This project is published under the Apache License 2.0, allowing free use, modification, and distribution under the license terms.
+
+---
+
 ## What This Is
 
 Pattern Geometry Commons is a **semantic intermediate representation (IR)** for 2D pattern systems. It is **NOT** a geometry library, **NOT** a drawing engine, and **NOT** a Maker.js replacement.
@@ -134,6 +142,7 @@ node scripts/compile.mjs \
 ```
 pattern-geometry-commons/
 ├── README.md                     ← This file
+├── NOTICE                        ← Copyright attribution
 ├── package.json                  ← npm package definition
 ├── LICENSE                       ← Apache-2.0
 │
@@ -147,8 +156,8 @@ pattern-geometry-commons/
 │   ├── compiler.mjs              ← Compiler pipeline + backend routing
 │   ├── example-lister.mjs        ← Example discovery and loading
 │   └── backends/
-│       ├── svg-backend.mjs       ← Minimal SVG backend
-│       └── makerjs-backend.mjs   ← Experimental Maker.js backend
+│       ├── svg-backend.mjs        ← Minimal SVG backend
+│       └── makerjs-backend.mjs    ← Experimental Maker.js backend
 │
 ├── examples/
 │   ├── islamic/                  ← 4 corpus-inspired Islamic patterns
@@ -296,4 +305,4 @@ npm run compile -- file.json --format svg --out output.svg
 Copyright 2026 [Tarek Alghorani](https://github.com/Tarek-g)
 
 Licensed under the Apache License, Version 2.0.
-See [LICENSE](LICENSE) for details.
+See [LICENSE](LICENSE) and [NOTICE](NOTICE) for details.
