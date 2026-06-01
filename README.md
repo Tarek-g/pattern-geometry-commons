@@ -1,19 +1,3 @@
----
-uid: pgc-readme
-description: Semantic intermediate representation (IR) for 2D pattern systems — schema, validation, compiler pipeline, and backend adapters.
-topics:
-  - geometric-patterns
-  - svg
-  - cad
-  - dxf
-  - makerjs
-  - pattern
-  - ir
-  - npm-package
-  - tilings
-  - islamic-art
----
-
 # Pattern Geometry Commons
 
 [![npm version](https://img.shields.io/npm/v/@tarek-g/pattern-geometry-commons)](https://www.npmjs.com/package/@tarek-g/pattern-geometry-commons)
