@@ -14,7 +14,8 @@
     "examples/",
     "scripts/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "engines": {
     "node": ">=18"
@@ -59,8 +60,5 @@
   "bugs": {
     "url": "https://github.com/Tarek-g/pattern-geometry-commons/issues"
   },
-  "author": "Tarek Alghorani",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+  "author": "Tarek Alghorani"
 }
