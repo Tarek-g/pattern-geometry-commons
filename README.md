@@ -37,9 +37,54 @@ It does **NOT** describe:
 
 ---
 
-## Stable Surface
+## Use This When
 
-These APIs are guaranteed stable. Breaking changes will be versioned.
+Use Pattern Geometry Commons when you want patterns to remain editable, portable,
+and meaningful across rendering and fabrication tools.
+
+Use it for:
+- Describing a pattern before choosing an output format
+- Validating motifs, tilings, symmetry, style, and metadata as structured data
+- Compiling the same semantic IR to SVG, Maker.js JSON, Maker.js SVG, or DXF
+- Keeping backend geometry separate from pattern meaning
+
+## Multi-Backend Demo
+
+The same IR file can compile to multiple outputs without changing the IR:
+
+```bash
+node scripts/compile.mjs \
+  examples/islamic/01-hex-star-field.json \
+  --format svg --out output/hex-star.svg
+
+node scripts/compile.mjs \
+  examples/islamic/01-hex-star-field.json \
+  --format makerjs-json --out output/hex-star.makerjs.json
+
+node scripts/compile.mjs \
+  examples/islamic/01-hex-star-field.json \
+  --format makerjs-dxf --out output/hex-star.dxf
+```
+
+| Input | Output | What Changes | What Stays Stable |
+|-------|--------|--------------|-------------------|
+| `pg-ir-v0` JSON | SVG | Web-renderable geometry | Motifs, tiling, symmetry, style intent |
+| `pg-ir-v0` JSON | Maker.js JSON | CAD-oriented model structure | Pattern semantics and validation contract |
+| `pg-ir-v0` JSON | DXF | Fabrication/export format | Same source IR and backend boundary |
+
+## How It Compares
+
+| Tool / Format | Primary Role | What It Does Not Preserve |
+|---------------|--------------|---------------------------|
+| SVG | Rendered vector output | Pattern intent, validation rules, backend-independent semantics |
+| Maker.js | Low-level geometry and export primitives | A domain-neutral pattern IR by itself |
+| CAD / DXF | Fabrication and drafting exchange | High-level motif, tiling, symmetry, and style meaning |
+| Pattern Geometry Commons | Semantic IR and compiler layer | Low-level geometry optimization and editor state |
+
+## Stable v0.x Public Surface
+
+These APIs are the stable public surface for v0.x. Breaking changes will be
+versioned.
 
 | API | Since | Contract |
 |-----|-------|----------|

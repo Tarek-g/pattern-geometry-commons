@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Pattern Geometry Commons README
+    url: https://github.com/Tarek-g/pattern-geometry-commons#readme
+    about: Read the project overview, API surface, examples, and backend notes.
