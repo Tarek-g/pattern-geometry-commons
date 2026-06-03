@@ -6,16 +6,6 @@
 
 **Pattern Geometry Commons** defines the semantic layer above Maker.js, SVG, and CAD tools. Existing tools know how to draw and export geometry. Pattern Geometry Commons knows what the pattern means before it becomes geometry.
 
----
-
-## Origin and Authorship
-
-Pattern Geometry Commons was created by **[Tarek Alghorani](https://github.com/Tarek-g)** in 2026 as a semantic IR for 2D geometric pattern systems, extracted from earlier work on [islamic-pattern-mvp](https://github.com/Tarek-g/islamic-pattern-mvp).
-
-This project is published under the Apache License 2.0, allowing free use, modification, and distribution under the license terms.
-
----
-
 ## What This Is
 
 Pattern Geometry Commons is a **semantic intermediate representation (IR)** for 2D pattern systems. It is **NOT** a geometry library, **NOT** a drawing engine, and **NOT** a Maker.js replacement.
@@ -322,6 +312,14 @@ pattern-geometry-commons/
 The [islamic-pattern-mvp](https://github.com/Tarek-g/islamic-pattern-mvp) repository is the proof-of-concept that validated the core approach. Pattern Geometry Commons extracts the semantic IR layer from that work into a standalone, domain-neutral specification.
 
 The islamic-pattern-mvp `scene-v4` / `ornament-ir-v1` remain the internal format of the existing app. PG-IR v0 is the public, generalized IR.
+
+---
+
+## Origin and Authorship
+
+Pattern Geometry Commons was created by **[Tarek Alghorani](https://github.com/Tarek-g)** in 2026 as a semantic IR for 2D geometric pattern systems.
+
+Authorship and attribution details are tracked through [NOTICE](NOTICE).
 
 ---
 
